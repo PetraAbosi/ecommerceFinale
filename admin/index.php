@@ -170,6 +170,17 @@
 
                                   <small style="color:red;" id="image_error" ></small>
                               </div>
+                              <div class ="form-group">
+
+                                <label for="type of product">Category: </label>
+
+                                <select name="category" id="category">
+                                <option value="fabric">Fabric</option>
+                                <option value="Bags">Bags</option>
+                                <option value="Shea">Shea butter</option>
+
+                                </select>
+                              </div>
 
                               <div class="form-group">
 
