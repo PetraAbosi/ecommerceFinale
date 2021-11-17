@@ -1,6 +1,7 @@
 <?php
 
-require('./settings/dbconnection.php');
+require('../settings/dbconnection.php');
+
 
 // inherit the methods from Connection
 class Product extends Dbconnection{

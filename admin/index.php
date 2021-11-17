@@ -177,7 +177,7 @@
                                 <select name="category" id="category">
                                 <option value="fabric">Fabric</option>
                                 <option value="Bags">Bags</option>
-                                <option value="Shea">Shea butter</option>
+                                <option value="mercedes">Shea butter</option>
 
                                 </select>
                               </div>
@@ -387,7 +387,7 @@
                     
 					
 					<td><a href='update_product.php?id={$x['product_id']}'>Update</a></td>
-					<td><a href='../actions/product_action.php?deleteProductsID={$x['product_id']}'>Delete</a></td>
+					<td><a href='../actions/delete_product.php?deleteProductsID={$x['product_id']}'>Delete</a></td>
 				</tr>
 				";                     
 

@@ -1,6 +1,7 @@
 <?php
 
-require_once('./models/product_class.php');
+require_once('../models/product_class.php');
+
 //require_once('./models/cart_class.php');
 
 
