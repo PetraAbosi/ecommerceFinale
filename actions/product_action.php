@@ -87,7 +87,6 @@ if(isset($_POST['addProductButton'])){
     $fileName1 = $folderName.basename($_FILES["prod_img"]["name"]);
 
     $product_catID = (int)$_POST['cat_name'];
-    $product_brandID = (int)$_POST['brand_name'];
     $product_title = $_POST['prod_title'];
     $product_price = $_POST['prod_price'];
     $product_desc = $_POST['prod_desc'];
@@ -96,27 +95,8 @@ if(isset($_POST['addProductButton'])){
       
      
     // call the add_product_controller function: return true or false
-    $result = add_products_controller($product_catID,$product_brandID,$product_title,$product_price,$product_desc,$fileName1);
+    $result = add_products_controller($product_catID,$product_title,$product_price,$product_desc,$fileName1);
    
-
-    if($result === true){
-         header("Location: ../admin/index.php");
-    }
-    else echo "insertion failed";
-
-}
-
-
-//ADDING BRAND
-// check if theres a POST variable with the name 'addProductButton'
-if(isset($_POST['addBrandButton'])){
-    // retrieve the name, description and quantity from the form submission
-  
-    $brand_name = $_POST['brand'];
-     
-    // call the add_product_controller function: return true or false
-    $result = add_brands_controller($brand_name);
-    
 
     if($result === true){
          header("Location: ../admin/index.php");
@@ -259,7 +239,6 @@ if (isset($_POST['update_product'])){
     $fileName1 = $folderName.basename($_FILES["prod_img"]["name"]);
     
     $product_catID = (int)$_POST['cat_name'];
-    $product_brandID = (int)$_POST['brand_name'];
     $product_title = $_POST['prod_title'];
     $product_price = $_POST['prod_price'];
     $product_desc = $_POST['prod_desc'];
@@ -269,33 +248,13 @@ if (isset($_POST['update_product'])){
     
     
     // call the function
-    $result = update_products_controller($product_catID,$product_brandID,$product_title,$product_price,$product_desc,$fileName1,$product_id);    
+    $result = update_products_controller($product_catID,$product_title,$product_price,$product_desc,$fileName1,$product_id);    
    
 
     if($result === true){
         header("Location: ../admin/index.php");
     } 
     else echo "update failed";
-
-}
-
-
-
-// UPDATE BRAND
-if(isset($_POST['brand_id'])){
-
-    $brand_id = $_POST['brand_id'];
-    $brand_name = $_POST['brand_name'];
-   
-    
-    
-    // call the function
-    $result = update_brands_controller($brand_id, $brand_name);
-    
-
-    if($result === true) header("Location: ../admin/index.php");
-    else echo "update failed";
-
 
 }
 

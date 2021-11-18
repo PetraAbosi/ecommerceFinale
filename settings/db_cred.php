@@ -5,7 +5,7 @@
 
 define('SERVER', 'localhost');
 define('USER', 'root');
-define('DATABASE', 'loozeele');
+define('DATABASE', 'shoppn');
 define('PASSWORD', '');
 
 

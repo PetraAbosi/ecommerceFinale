@@ -5,11 +5,11 @@ require_once('../models/product_class.php');
 //require_once('./models/cart_class.php');
 
 
-function add_products_controller($product_cat, $product_brand, $product_title, $product_price, $product_desc, $product_image){
+function add_products_controller($product_cat, $product_title, $product_price, $product_desc, $product_image){
     // create an instance of the Product class
     $product_instance = new Product();
     // call the method from the class
-    return $product_instance->add_products($product_cat, $product_brand, $product_title, $product_price, $product_desc, $product_image);
+    return $product_instance->add_products($product_cat, $product_title, $product_price, $product_desc, $product_image);
 
 }
 
@@ -56,11 +56,11 @@ function delete_categories_controller($id){
 
 }
 
-function update_products_controller($product_catID,$product_brandID,$product_title,$product_price,$product_desc,$fileName1, $product_id){
+function update_products_controller($product_catID,$product_title,$product_price,$product_desc,$fileName1, $product_id){
     // create an instance of the Product class
     $product_instance = new Product();
     // call the method from the class
-    return $product_instance->update_one_products($product_catID,$product_brandID,$product_title,$product_price,$product_desc,$fileName1, $product_id);
+    return $product_instance->update_one_products($product_catID,$product_title,$product_price,$product_desc,$fileName1, $product_id);
 
 }
 
@@ -181,6 +181,8 @@ function displayAllProduct(){
         $product_title = $value['product_title'];
         $product_price = $value['product_price'];
         $product_image = $value['product_image'];
+
+        echo $product_id;
         
        
 
@@ -206,7 +208,7 @@ function displayAllProduct(){
                 <div class="clearfix"></div>
             </div>
                     <div class="add">
-               <button class="btn btn-danger my-cart-btn my-cart-b" data-id="2" data-name="addCartButton" data-summary="summary 2" data-price="$product_price" data-quantity="1" data-image=" $product_image" href="singleProduct.php?id=$product_id">Select Product</button>
+               <button class="btn btn-danger my-cart-btn my-cart-b" data-id="2" data-name="addCartButton" data-summary="summary 2" data-price="$product_price" data-quantity="1" data-image=" $product_image" href='singleProduct.php?id=$product_id'>Select Product</button>
             </div>
         </div>
         </div>

@@ -28,7 +28,7 @@
               header("Location: ../Admin/index.php");
           }
           //other wise user is a regular customer, laod user view index page
-          else header("Location: ../View/products.php");
+          else header("Location: ../View/index.php");
           }  
           else {
             echo '<script>alert("Incorrect Password");
