@@ -2,14 +2,14 @@
 
 require_once('../models/product_class.php');
 
-//require_once('./models/cart_class.php');
+require_once('../models/cart_class.php');
 
 
-function add_products_controller($product_cat, $product_title, $product_price, $product_desc, $product_image){
+function add_products_controller($product_cat, $product_brand, $product_title, $product_price, $product_desc, $product_image){
     // create an instance of the Product class
     $product_instance = new Product();
     // call the method from the class
-    return $product_instance->add_products($product_cat, $product_title, $product_price, $product_desc, $product_image);
+    return $product_instance->add_products($product_cat, $product_brand, $product_title, $product_price, $product_desc, $product_image);
 
 }
 
@@ -83,95 +83,7 @@ function update_categories_controller($cat_id, $cat_name){
 
 }
 
-function displayOneProduct($id){
-    $all = select_one_products_controller($id);
-    foreach ($all as $value){
-        $product_id = $value['product_id'];
-        $product_title = $value['product_title'];
-        $product_price = $value['product_price'];
-        $product_image = $value['product_image'];
-        $product_desc = $value['product_desc'];
-        $ip = Cart::getIpAddress();
-      
-        
-        
-       
 
-  
-    echo <<<ALL
-
-    <div class="col-sm-6">
-    <div class="product-images">
-        <div class="product-main-img">
-            <img src="$product_image" alt="Product Image">
-        </div>
-        
-       
-    </div>
-    </div>
-
-    <div class="col-sm-6">
-    <div class="product-inner">
-        <h2 class="product-name">$product_title</h2>
-        <div class="product-inner-price">
-            <ins>GHS $product_price.00</ins> 
-        </div>    
-        
-        <form method="GET" action="../actions/cart_action.php" class="cart">
-            <div class="quantity">
-                <input type="hidden" value="$ip" name="ip_address">
-                <input type="hidden" value="$product_id" name="product_id">
-                <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">                
-            </div>
-            <button name="addCartButton" type="submit">Add to cart</button>
-        </form>   
-        
-        <div class="product-inner-category">
-            <p>Category: <a href="">Summer</a>. Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>. </p>
-        </div> 
-        
-        <div role="tabpanel">
-            <ul class="product-tab" role="tablist">
-                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
-                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
-            </ul>
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active" id="home">
-                    <h2>Product Description</h2>  
-                    <p>$product_desc</p>
-
-              
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="profile">
-                    <h2>Reviews</h2>
-                    <div class="submit-review">
-                        <p><label for="name">Name</label> <input name="name" type="text"></p>
-                        <p><label for="email">Email</label> <input name="email" type="email"></p>
-                        <div class="rating-chooser">
-                            <p>Your rating</p>
-
-                            <div class="rating-wrap-post">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                        </div>
-                        <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
-                        <p><input type="submit" value="Submit"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-    </div>
-
-    ALL;
-    }
-    
-}
 
 
 function displayAllProduct(){
@@ -181,8 +93,6 @@ function displayAllProduct(){
         $product_title = $value['product_title'];
         $product_price = $value['product_price'];
         $product_image = $value['product_image'];
-
-        echo $product_id;
         
        
 
@@ -206,6 +116,10 @@ function displayAllProduct(){
                     <div class="starbox small ghosting"> </div>
                 </div>
                 <div class="clearfix"></div>
+            </div>
+
+            <div >
+                <input type="hidden" name='id' value="$product_id">
             </div>
                     <div class="add">
                <button class="btn btn-danger my-cart-btn my-cart-b" data-id="2" data-name="addCartButton" data-summary="summary 2" data-price="$product_price" data-quantity="1" data-image=" $product_image" href='singleProduct.php?id=$product_id'>Select Product</button>

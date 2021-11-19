@@ -3,6 +3,7 @@
 
   require ('../controllers/product_controller.php');
   //calls methods in the controller to execute
+  $brands = select_all_brands_controller();
   $categories = select_all_categories_controller();
   $products = select_all_products_controller();
 
@@ -43,6 +44,10 @@
                   </li>
 
                   <li class="nav-item">
+                      <a class="nav-link btn" data-toggle="modal" data-target="#addBrandModal">Add Brand </a>
+                  </li>
+
+                  <li class="nav-item">
                       <a class="nav-link btn" data-toggle="modal" data-target="#addProductModal" >Add Product</a>
                   </li>
                 
@@ -72,6 +77,20 @@
                                       <div class="input-group-prepend">
                                           <span class="input-group-text"><i class="ni ni-ui-04"></i></span>
                                       </div>
+                                      <select id="brand_id" class="form-control" name="brand_name" required>
+                                          <option  value="" disabled selected> -- select brand -- </option>
+                                      <?php
+                                      if ($brands){
+                                          foreach ($brands as $value){
+                                              $brand_name = $value['brand_name'];
+                                              $brand_id = $value['brand_id'];
+
+                                              echo "<option value='$brand_id'>$brand_name</option>";
+                                          }
+
+                                      }
+                                      ?>
+                                      </select >
                                       <small style="color:red;" id="category_error"></small>
 
 <!--                                      <input id="name" type="text" placeholder="Name" class="form-control " name="name"   autocomplete="name" autofocus>-->
@@ -151,6 +170,18 @@
 
                                   <small style="color:red;" id="image_error" ></small>
                               </div>
+                              <div class ="form-group">
+
+                                <label for="type of product">Category: </label>
+
+                                <select name="cars" id="cars">
+                                <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                                <option value="mercedes">Mercedes</option>
+                                <option value="audi">Audi</option>
+
+                                </select>
+                              </div>
 
                               <div class="form-group">
 
@@ -210,10 +241,76 @@
                   </div>
               </div>
           </div>
+
+
           
 <!--   ADD CATEGORY - END       -->
 
-<!--  Display Category MODAL  END -->
+<!--         ADD BRAND MODAL  -->
+          <div class="modal fade" id="addBrandModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Add New Brand</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+
+                          <form method="POST" action="../actions/product_action.php" id="addProductForm" onsubmit="return validateAddNewBrand();">
+                          <div class="form-group">
+				            <input class="form-control" type="text" placeholder="Brand Name" name="brand" >
+			              </div>
+
+			             
+			                <input type="submit" name="addBrandButton">
+                              
+                          </form>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+<!--  ADD PRODUCT MODAL  END -->
+
+
+          <h5>Brand</h5>
+          <table class="table table-hover ">
+              <thead>
+              <tr>
+
+                  <th>Brand Name</th>
+                 
+                  
+                  <th></th>
+				  <th></th>
+
+              </tr>
+              </thead>
+              <tbody>
+
+              <?php
+
+                foreach ($brands as $x) {
+                                    
+                                       
+                    echo 
+				"
+				<tr>
+					<td>{$x['brand_name']}</td>
+					
+					<td><a href='update_brand.php?id={$x['brand_id']}'>Update</a></td>
+					<td><a href='../actions/product_action.php?deleteBrandsID={$x['brand_id']}'>Delete</a></td>
+				</tr>
+				";                     
+
+                     
+                }              
+
+              ?>
+              </tbody>
+          </table>
           
           <h5>Category</h5>
           <table class="table table-hover ">
@@ -291,7 +388,7 @@
                     
 					
 					<td><a href='update_product.php?id={$x['product_id']}'>Update</a></td>
-					<td><a href='../actions/delete_product.php?deleteProductsID={$x['product_id']}'>Delete</a></td>
+					<td><a href='../actions/product_action.php?deleteProductsID={$x['product_id']}'>Delete</a></td>
 				</tr>
 				";                     
 

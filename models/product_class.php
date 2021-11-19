@@ -2,14 +2,13 @@
 
 require('../settings/dbconnection.php');
 
-
 // inherit the methods from Connection
 class Product extends Dbconnection{
 
 
-	function add_products($product_cat, $product_title, $product_price, $product_desc, $product_image){
+	function add_products($product_cat, $product_brand, $product_title, $product_price, $product_desc, $product_image){
 		// return true or false
-		return $this->query("insert into products(product_cat, product_title, product_price, product_desc, product_image) values('$product_cat', '$product_title', '$product_price', '$product_desc', '$product_image')");
+		return $this->query("insert into products(product_cat, product_brand, product_title, product_price, product_desc, product_image) values('$product_cat', '$product_brand', '$product_title', '$product_price', '$product_desc', '$product_image')");
 		
 
 	}

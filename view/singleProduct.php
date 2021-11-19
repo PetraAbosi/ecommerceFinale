@@ -216,36 +216,44 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <div id="picture-frame">
             <?php
 
-                displayOneProduct($id);
-                echo $id;
+                $oneproduct = select_one_products_controller($id);
+                foreach ($oneproduct as $value){
+                    $product_id = $value['product_id'];
+                    $product_title = $value['product_title'];
+                    $product_price = $value['product_price'];
+                    $product_image = $value['product_image'];
+                    $product_desc = $value['product_desc'];
+                    $ip = Cart::getIpAddress();
+                    //echo $product_id, $product_title, $product_price;
+                };
                 
             ?>
-		</div>
-										<script src="js/jquery.zoomtoo.js"></script>
-								<script>
+            <img src="<?php echo $product_image ?>" alt="product" srcset="" width="250" height="250">
+
+            <script src="..js/jquery.zoomtoo.js"></script>
+			<script>
 			$(function() {
 				$("#picture-frame").zoomToo({
 					magnify: 1
 				});
 			});
 		</script>
-		
-		
-		
-			</div>
-			</div>
+</div>
+					
+</div>
+</div>
 			<div class="col-md-7 single-top-left ">
 								<div class="single-right">
-				<h3>Wheat</h3>
+				<h3><?php echo $product_title?></h3>
 				
 					
 				 <div class="pr-single">
-				  <p class="reduced "><del>$10.00</del>$5.00</p>
+				  <p class="reduced "><?php echo $product_price?>.00</p>
 				</div>
 				<div class="block block-w3">
 					<div class="starbox small ghosting"> </div>
 				</div>
-				<p class="in-pa"> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
+				<p class="in-pa"> <?php echo $product_desc?> </p>
 			   	
 				<ul class="social-top">
 					<li><a href="#" class="icon facebook"><i class="fa fa-facebook" aria-hidden="true"></i><span></span></a></li>
@@ -253,9 +261,14 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 					<li><a href="#" class="icon pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i><span></span></a></li>
 					<li><a href="#" class="icon dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i><span></span></a></li>
 				</ul>
-					<div class="add add-3">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="Wheat" data-summary="summary 1" data-price="6.00" data-quantity="1" data-image="images/si.jpg">Add to Cart</button>
-										</div>
+                 <div>
+                     <form method ="get" action="../actions/cart_action.php">
+                        <input type="hidden" name='product_id' value="<?php echo $product_id?>">
+                        <label for="quantity">Qty</label>
+                        <input type="text" name='quantity'placeholder="Enter Quantity">
+                        <button  type="submit" name="addCartButton">Add To Cart </button>
+
+                     </form>
 				
 				 
 			   
