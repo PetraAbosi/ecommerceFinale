@@ -230,14 +230,14 @@ function displayCart(){
                    
                     <a class="btn btn-primary" href='../actions/cart_action.php?deleteID={$value['product_id']}'> 
                         Delete Item
+                    </a>  
+                    
+                    <a class="btn btn-primary" href='../login/login.php'> 
+                    Checkout
                     </a>
-
-                   
 
                     
-                    <a class="btn btn-primary" href='../login/login.php?payID={$value['product_id']}'> 
-                        Checkout
-                    </a>
+            
                     
                     
                 </td>
@@ -310,7 +310,7 @@ function total_quantity(){
     }
 }
 
-function total_cart(){
+function total_Amount_in_Cart(){
     $ip = Cart::getIpAddress();
     $cart_instance = new Cart();
     $arr = $cart_instance->cart_item_amount($ip);
@@ -323,23 +323,26 @@ function total_cart(){
     }
 }
 
-function add_orders($status, $invoice){
-    $arr = false;
+function add_orders($customer_id, $invoice_no, $order_status){
+   
     $ip = Cart::getIpAddress();
-    $user_id=$_SESSION['user_id'];
-    $cart_instance = new Cart();
-    $cartProducts = $cart_instance->cart_items($ip);
-    if($cartProducts){
-        $cartItems = $cartObj->fetch();
+    $customer_id=$_SESSION['customer_id'];
 
-        foreach ($cartItems as $item =>$value) {
-            $prod_id = $value[0];
-            $qty = $value[10];
-            $toReturn = $cart_instance->add_orders($user_id, $prod_id, $qty, $invoice, $status);
+   
+    $cart_instance = new Cart();
+
+    if($cart_instance){
+        $toReturn = $cart_instance->add_orders($customer_id, $invoice_no, $order_status);
         }
+    
+
+    else{ 
+           
+            header("Location: ../view/cart.php");
     }
-   return $arr;
+
 }
+
 
 
 

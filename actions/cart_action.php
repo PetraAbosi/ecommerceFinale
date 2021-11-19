@@ -2,7 +2,6 @@
 session_start();
 require_once('../controllers/cart_controller.php');
 require_once('../models/cart_class.php');
-echo "connected";
 
 //ADDING BRAND
 // check if theres a POST variable with the name 'addProductButton'
@@ -10,26 +9,26 @@ if(isset($_GET['addCartButton'])){
     // retrieve the name, description and quantity from the form submission
   
     $prod_id = $_GET['product_id'];
-    $ip = $_GET['ip_address'];
-    $qty = $_GET['quantity'];
+    $ip = Cart::getIpAddress();
+    $qty = $_GET['qty'];
    
-  echo $qty;
+  
 
    
 
      
     // call the add_product_controller function: return true or false
     $result = add_carts($prod_id, $ip, $qty);
-
    
 
     if($result === true){
          header("Location: ../view/cart.php");
     }
-    else echo "insertion failed";
-
+    else {
+        echo "insertion failed";
+    }
+    
 }
-
 //DELETING Cart
 if(isset($_GET['deleteID'])){
 

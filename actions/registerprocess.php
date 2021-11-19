@@ -30,7 +30,7 @@ if(isset($_POST['registerUser'])){
             //call the add customer controller
             $register = addCustomerController($fullName, $email, $password, $country,$city,$contact);
             if($register === true) {
-                header("Location: ../login/login.php");
+                header("Location: ../view/login.php");
                 $_SESSION['register-success'] = 'Successfully created';
             }
             else{

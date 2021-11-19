@@ -13,7 +13,7 @@ class Cart extends Dbconnection{
 	}
 
 	function cart_item_amount($ip){
-		return $this->query("SELECT SUM(product_price * qty) AS amount FROM products JOIN cart ON products.product_id = cart.p_id AND cart.ip_add = '$ip_address'");
+		return $this->query("SELECT SUM(product_price * qty) AS amount FROM products JOIN cart ON products.product_id = cart.p_id AND cart.ip_add = '$ip'");
 	}
 
 	function validate_cart($ip, $prod_id){
@@ -40,9 +40,8 @@ class Cart extends Dbconnection{
 		return $this->query("UPDATE cart SET qty='$qty' WHERE ip_add='$ip' AND p_id='$id'");
 	}
 
-	
-	function add_orders($user_id, $prod_id, $qty, $invoice, $status){
-		return $this->query("INSERT INTO orders (customer_id, product_id, qty, invoice_no, status, order_date) VALUES ('$user_id', '$prod_id','$qty', '$invoice', '$status', NOW())");
+	function add_orders($customer_id, $invoice_no, $order_status){
+		return $this->query("INSERT INTO orders (`customer_id`, `invoice_no`, `status`, `order_date`) VALUES ('$customer_id', '$invoice_no', '$order_status', NOW())");
 	}
 
 	function add_payment($amount,$user_id,$currency){

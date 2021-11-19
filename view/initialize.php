@@ -1,12 +1,13 @@
 <?php
-
+session_start();
+require('../controllers/cart_controller.php');
 $curl = curl_init();
 
-$email = "your@email.com";
-$amount = 30000;  //the amount in kobo. This value is actually NGN 300
+$email = $_SESSION["customer_email"];
+$amount = total_Amount_in_Cart();// $_SESSION["amount"];;  //the amount in kobo. This value is actually NGN 300
 
 // url to go to after payment
-$callback_url = '/view/order_detail.php';  
+$callback_url = '../view/index.php';  
 
 curl_setopt_array($curl, array(
   CURLOPT_URL => "https://api.paystack.co/transaction/initialize",
